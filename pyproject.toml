@@ -1,0 +1,65 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "laya-ane"
+version = "0.1.0"
+description = "CoreML / Apple Neural Engine inference for Laya typed decision models"
+keywords = ["coreml", "ane", "laya", "typed-decisions", "decision-model", "local-ai", "apple-silicon"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+dependencies = [
+  "coremltools>=8.0; sys_platform == 'darwin'",
+  "numpy>=1.26",
+  "huggingface-hub>=0.34,<2",
+  "tokenizers>=0.21,<1",
+  "safetensors>=0.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.12", "build>=1"]
+convert = [
+  "torch>=2.2; sys_platform == 'darwin'",
+  "coremltools>=8.0; sys_platform == 'darwin'",
+  "safetensors>=0.4",
+]
+reference = ["torch>=2.2", "transformers>=4.45,<6", "safetensors>=0.4"]
+benchmark = ["matplotlib>=3.10", "pyarrow>=18"]
+demo = ["rich>=15,<16", "Pillow>=12,<13"]
+
+[project.scripts]
+laya-ane = "laya_ane.cli:main"
+laya-snake = "laya_ane.snake.cli:main"
+
+[project.urls]
+Repository = "https://github.com/vipuldivyanshu92/laya-ane"
+Upstream = "https://github.com/NandhaKishorM/laya"
+MLXPort = "https://github.com/mizorewww/laya-mlx"
+Documentation = "https://github.com/vipuldivyanshu92/laya-ane#readme"
+Issues = "https://github.com/vipuldivyanshu92/laya-ane/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["laya_ane"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/laya_ane", "/pyproject.toml", "/README.md", "/LICENSE", "/NOTICE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: requires downloaded Laya checkpoints"]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = [".upstream"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

@@ -1,0 +1,5 @@
+# Model weights are not committed (too large).
+# From the repo root:
+#   source .venv/bin/activate
+#   pip install -e '.[convert]'
+#   python scripts/prepare_ios_bundle.py

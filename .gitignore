@@ -1,0 +1,26 @@
+.venv/
+.upstream/
+.cache/
+models/
+artifacts/
+*.safetensors
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.DS_Store
+.env
+*.log
+uv.lock
+
+# On-device CoreML weights (~300MB+) — generate with scripts/prepare_ios_bundle.py
+ios/LayaANE/LayaANE/Resources/Model/**
+!ios/LayaANE/LayaANE/Resources/Model/.gitkeep
+
+# Xcode
+**/xcuserdata/
+**/*.xcuserstate
+**/DerivedData/
+*.mlmodelc/
